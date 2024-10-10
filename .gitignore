@@ -5,7 +5,7 @@
 *.ipynb_checkpoints
 *__pycache__/
 
-# HW2
+# HW2,4
 *MNIST/
 
 # HW3
