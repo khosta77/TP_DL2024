@@ -9,10 +9,10 @@
 *MNIST/
 
 # HW3
-HW3/data/*
+HW03/data/*
 *indoor_outdoor_dataset/
 
 # HW6
-HW6/balls/
-HW6/oi5_ball/
-HW6/seminar_objdet_retina_oi5_ball/
+HW06/balls/
+HW06/oi5_ball/
+HW06/seminar_objdet_retina_oi5_ball/
