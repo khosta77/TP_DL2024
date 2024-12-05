@@ -1,0 +1,10 @@
+torchmetrics
+numpy
+torch
+matplotlib
+torchvision
+tqdm
+progressbar
+tensorboard
+matplotlib
+scikit-learn
