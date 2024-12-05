@@ -4,6 +4,7 @@
 # jupyter
 *.ipynb_checkpoints
 *__pycache__/
+*mymodel
 
 # HW2,4
 *MNIST/
