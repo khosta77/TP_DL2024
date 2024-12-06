@@ -34,7 +34,7 @@ class Model:
     def _save_lists_to_file(self, file_name, list1, list2, list3, list4, list5, list6):
         with open(file_name, 'wb') as f:
             pickle.dump((list1, list2, list3, list4, list5, list6), f)
-        
+
     def plotLAF(
             self,
             train_loss_epochs, test_loss_epochs,
@@ -42,7 +42,7 @@ class Model:
             train_f1_epochs, test_f1_epochs,
             epochs
         ):
-    
+
         train = [ train_loss_epochs, train_accuracy_epochs, train_f1_epochs ]
         test = [ test_loss_epochs, test_accuracy_epochs, test_f1_epochs ]
         label = [ 'Loss', 'Accuracy', 'F1' ]
@@ -58,14 +58,14 @@ class Model:
             plt.legend(loc=0)
             plt.grid()
         plt.savefig('img/metric_plot.png')
-    
+
     def _accuracy(self, outputs, labels):
         self._pred = (outputs > 0.5).float()
         return torch.sum(self._pred == labels).item() / len(labels)
 
     def _f1(self, pred, labels):
         return self._f1_score(pred, labels)
-    
+
     def train(self, train_loader, test_loader, epochs, accurate_break=0.951, buildplot=False, save_result='work.log'):
         train_loss_epochs, train_accuracy_epochs, train_f1_epochs = [], [], []
         test_loss_epochs, test_accuracy_epochs, test_f1_epochs = [], [], []
@@ -114,7 +114,7 @@ class Model:
             test_loss_epochs.append(np.mean(test_loss))
             test_accuracy_epochs.append(np.mean(test_acc))
             test_f1_epochs.append(np.mean(test_f1))
-        
+
             print(
                 f'Epoch [{(epoch+1)}/{epochs}] (Train/Test) ',
                 f'Loss: {train_loss_epochs[-1]:.3f}/{test_loss_epochs[-1]:.3f}, ',
@@ -127,6 +127,11 @@ class Model:
                 print('На обучающей и тестовой выборке достигли желаемого результата.\n',
                       'Чтобы не израходовать ресурсы машины:\t break')
                 break
+
+            if len(test_accuracy_epochs) >= 3:
+                if test_accuracy_epochs[-3] > test_accuracy_epochs[-1]:
+                    print(f'\t\t!!!Мы достигли апогея обучения!!!')
+                    break
 
         if buildplot:
             self.plotLAF(
