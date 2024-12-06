@@ -38,7 +38,7 @@ transform = transforms.Compose([
     transforms.AugMix(),
     transforms.RandomRotation(degrees=(0, 180)),
     transforms.Resize([SHAPE, SHAPE]),
-    transforms.ToTensor(),           
+    transforms.ToTensor(),
     transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
 ])
 
@@ -54,8 +54,9 @@ test_loader = DataLoader(test_data, batch_size=32, shuffle=False)
 
 if __name__ == "__main__":
     cnn = CNN().to(DEVICE)
-    criterion = nn.BCELoss()
-    optimizer = optim.SGD(cnn.parameters(), lr=LEARNING_RATE)
+    print(f'{cnn}\nКол-во обучаемых параметров сети: {sum([p.numel() for p in cnn.parameters()])}')
+    criterion = CRITERION
+    optimizer = OPTIMIZER(cnn)
     model = Model(cnn, criterion, optimizer, DEVICE)
     _, _, _, _, _, _ = model.train(train_loader, test_loader, EPOCH, buildplot=True)
     model.save('mymodel')
