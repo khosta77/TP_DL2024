@@ -17,3 +17,6 @@ HW03/data/*
 HW06/balls/
 HW06/oi5_ball/
 HW06/seminar_objdet_retina_oi5_ball/
+
+# HW12
+fashion_mnist/
